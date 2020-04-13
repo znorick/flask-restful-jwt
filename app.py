@@ -15,7 +15,7 @@ app.config['JWT_AUTH_URL_RULE'] = '/login'
 app.config['JWT_EXPIRATION_DELTA'] = timedelta(seconds=1800)
 app.config['JWT_AUTH_USERNAME_KEY'] = 'username' # default
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///../data.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
 jwt = JWT(app, authenticate, identity) # default /auth
 api = Api(app)
 api.add_resource(ItemResource, '/item/<string:name>')
@@ -23,9 +23,10 @@ api.add_resource(ItemListResource, '/items')
 api.add_resource(UserResource, '/register')
 api.add_resource(StoreResource, '/store/<string:name>')
 
-@app.before_first_request
-def create_tables():
-    db.create_all()
+# Uncomment to run locally
+#@app.before_first_request
+#def create_tables():
+#    db.create_all()
 
 @jwt.auth_response_handler
 def auth_resoponse_handler(access_token, identity):
