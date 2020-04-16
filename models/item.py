@@ -18,7 +18,7 @@ class Item(db.Model):
         self.store_id = store_id
 
     def dict_repr(self):
-        return {'name': self.name, 'price': self.price}
+        return {'id': self.id, 'name': self.name, 'price': self.price, 'store_id': self.store_id}
 
 
 @initializable

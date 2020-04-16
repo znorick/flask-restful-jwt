@@ -18,6 +18,9 @@ class User(db.Model):
     def __str__(self):
         return f'User(id={self.id}, username={self.username}, password=***)'
 
+    def dict_repr(self):
+        return {'id': self.id, 'username': self.username}
+
 
 @initializable
 class UserRepository:
@@ -41,4 +44,9 @@ class UserRepository:
     @classmethod
     def save(cls, user):
         db.session.add(user)
+        db.session.commit()
+
+    @classmethod
+    def delete(cls, user):
+        db.session.delete(user)
         db.session.commit()
